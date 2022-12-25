@@ -1,0 +1,18 @@
+#!/bin/bash
+declare -A tab
+declare -i i=0
+source /usr/local/src/guilh.sh
+# x.cpp
+if [ "$1" == "-v" -o "$1" == "--version" ] ; then
+    version
+elif [ "$1" == "-h" -o "$1" == "--help" ] ; then
+    help
+else
+    cherche "$@"
+    shift "$?"
+    if [ "$1" == "-o" ] ; then
+        g++ "${tab[@]}" -o "$2"
+    elif [ "$1" == "-ox" ] ; then
+        clear ; g++ "${tab[@]}" -o "$2" && ./"$2"
+    fi
+fi

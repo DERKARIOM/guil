@@ -1,0 +1,7 @@
+Package:guil
+Version:1.0beta
+Architecture:all
+Essential:no
+Priority:optional
+Maintainer:DERKARIOM
+Description:pour cree des interface graphique facilement
