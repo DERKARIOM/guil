@@ -7,6 +7,8 @@ elif [ "$1" == "gtk" -o "$1" == "GTK" ] ; then
     cat /usr/local/src/gtk.txt > /usr/local/bin/guil
 elif [ "$1" == "gtkmm" -o "$1" == "GTKMM" ] ; then
     cat /usr/local/src/gtkmm.txt > /usr/local/bin/guil
+elif [ "$1" == "autocode.true" ] ; then
+    cp -r /usr/local/src/.vscode "$2"
 elif [ "$1" == "?" ] ; then
     grep "x.c" /usr/local/bin/guil >> /dev/null && echo "*Langage C"
     grep "x.cpp" /usr/local/bin/guil >> /dev/null && echo "*Langage C++"
