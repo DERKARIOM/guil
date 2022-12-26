@@ -14,7 +14,7 @@ cherche()
 }
 version()
 {
-    echo "Version Guil 1.0 beta :)"
+    echo "Version Guil 1.1 beta :)"
 }
 help()
 {

@@ -1,9 +1,15 @@
 #!/bin/bash
-if [ "$1" == "c" -o "$1" == C ] ; then
+if [ "$1" == "c" -o "$1" == "C" ] ; then
     cat /usr/local/src/c.txt > /usr/local/bin/guil
 elif [ "$1" == "cpp" -o "$1" == "CPP" -o "$1" == "c++" -o "$1" == "C++" ] ; then
     cat /usr/local/src/cpp.txt > /usr/local/bin/guil
+elif [ "$1" == "gtk" -o "$1" == "GTK" ] ; then
+    cat /usr/local/src/gtk.txt > /usr/local/bin/guil
+elif [ "$1" == "gtkmm" -o "$1" == "GTKMM" ] ; then
+    cat /usr/local/src/gtkmm.txt > /usr/local/bin/guil
 elif [ "$1" == "?" ] ; then
     grep "x.c" /usr/local/bin/guil >> /dev/null && echo "*Langage C"
     grep "x.cpp" /usr/local/bin/guil >> /dev/null && echo "*Langage C++"
+    grep "x.gtk" /usr/local/bin/guil >> /dev/null && echo "*Langage C et Gtk"
+    grep "x.gtkmm" /usr/local/bin/guil >> /dev/null && echo "*Langage C++ et Gtkmm"
 fi
