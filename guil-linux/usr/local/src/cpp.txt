@@ -6,7 +6,9 @@ source /usr/local/src/guilh.sh
 if [ "$1" == "-v" -o "$1" == "--version" ] ; then
     version
 elif [ "$1" == "-h" -o "$1" == "--help" ] ; then
-    help
+    help | less
+elif [ "$1" == "-i" -o "$1" == "--information" ] ; then
+    info | less
 else
     cherche "$@"
     shift "$?"
@@ -14,5 +16,7 @@ else
         g++ "${tab[@]}" -o "$2"
     elif [ "$1" == "-ox" ] ; then
         clear ; g++ "${tab[@]}" -o "$2" && ./"$2"
+    else
+        help | less
     fi
 fi

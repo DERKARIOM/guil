@@ -2,17 +2,21 @@
 declare -A tab
 declare -i i=0
 source /usr/local/src/guilh.sh
-# x.gtkmm
+# x.c
 if [ "$1" == "-v" -o "$1" == "--version" ] ; then
     version
 elif [ "$1" == "-h" -o "$1" == "--help" ] ; then
-    help
+    help | less
+elif [ "$1" == "-i" -o "$1" == "--information" ] ; then
+    info | less
 else
     cherche "$@"
     shift "$?"
     if [ "$1" == "-o" ] ; then
-        g++ "${tab[@]}" -o "$2" $(pkg-config gtkmm-3.0 --cflags --libs)
+        gcc "${tab[@]}" -o "$2"
     elif [ "$1" == "-ox" ] ; then
-        clear ; g++ "${tab[@]}" -o "$2" $(pkg-config gtkmm-3.0 --cflags --libs) && ./"$2"
+        clear ; gcc "${tab[@]}" -o "$2" && ./"$2"
+    else
+        help | less
     fi
 fi

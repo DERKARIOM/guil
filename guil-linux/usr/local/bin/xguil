@@ -1,17 +1,44 @@
 #!/bin/bash
+source /usr/local/src/guilh.sh
 if [ "$1" == "c" -o "$1" == "C" ] ; then
-    cat /usr/local/src/c.txt > /usr/local/bin/guil
+    gcc -v >> /dev/null 2> /dev/null
+    if [ "$?" -eq 0 ] ; then
+        cat /usr/local/src/c.txt > /usr/local/bin/guil
+    else
+        sudo apt-get install gcc
+    fi
 elif [ "$1" == "cpp" -o "$1" == "CPP" -o "$1" == "c++" -o "$1" == "C++" ] ; then
-    cat /usr/local/src/cpp.txt > /usr/local/bin/guil
+    g++ -v >> /dev/null 2> /dev/null
+    if [ "$?" -eq 0 ] ; then
+        cat /usr/local/src/cpp.txt > /usr/local/bin/guil
+    else
+        sudo apt-get install g++
+    fi
 elif [ "$1" == "gtk" -o "$1" == "GTK" ] ; then
-    cat /usr/local/src/gtk.txt > /usr/local/bin/guil
+    pkg-config --libs --cflags gtk+-3.0 >> /dev/null 2> /dev/null
+    if [ "$?" -eq 0 ] ; then
+        cat /usr/local/src/gtk.txt > /usr/local/bin/guil
+    else
+        sudo apt-get install libgtk-3-dev
+    fi
 elif [ "$1" == "gtkmm" -o "$1" == "GTKMM" ] ; then
-    cat /usr/local/src/gtkmm.txt > /usr/local/bin/guil
+    pkg-config gtkmm-3.0 --cflags --libs >> /dev/null 2> /dev/null
+    if [ "$?" -eq 0 ] ; then 
+        cat /usr/local/src/gtkmm.txt > /usr/local/bin/guil
+    else
+        sudo apt-get install libgtkmm-3.0-dev
+    fi
 elif [ "$1" == "autocode.true" ] ; then
     cp -r /usr/local/src/.vscode "$2"
+elif [ "$1" == "autocode.false" ] ; then
+    if [ -d ".vscode" ] ; then
+        rm -r .vscode
+    fi
 elif [ "$1" == "?" ] ; then
-    grep "x.c" /usr/local/bin/guil >> /dev/null && echo "*Langage C"
-    grep "x.cpp" /usr/local/bin/guil >> /dev/null && echo "*Langage C++"
-    grep "x.gtk" /usr/local/bin/guil >> /dev/null && echo "*Langage C et Gtk"
-    grep "x.gtkmm" /usr/local/bin/guil >> /dev/null && echo "*Langage C++ et Gtkmm"
+    grep "x.c" /usr/local/bin/guil >> /dev/null && echo "+Langage C"
+    grep "x.cpp" /usr/local/bin/guil >> /dev/null && echo "+Langage C++"
+    grep "x.gtk" /usr/local/bin/guil >> /dev/null && echo "+Langage C et Gtk"
+    grep "x.gtkmm" /usr/local/bin/guil >> /dev/null && echo "+Langage C++ et Gtkmm"
+else
+    xhelp | less
 fi
